@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import useFetch from '../hooks/useFetch';
 
 interface Asset {
   id: string;
@@ -38,29 +39,21 @@ export default function List() {
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
   const pagination = new Array(totalPages).fill(0);
+  const { data } = useFetch(
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+  );
 
   useEffect(() => {
     let isMounted = true;
-
-    async function getCoins() {
-      const list = await fetch(
-        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-      )
-        .then((res) => res.json())
-        .then((coinList) => {
-          setAllCoins(coinList);
-          const current = coinList.slice(firstCoinIdx, lastCoinIdx);
-          setCurrentCoins(current);
-        });
-
-      console.log(list);
+    if (data) {
+      if (isMounted) setAllCoins(data);
+      const current = allCoins.slice(firstCoinIdx, lastCoinIdx);
+      if (isMounted) setCurrentCoins(current);
     }
-
-    getCoins();
     return () => {
       isMounted = false;
     };
-  }, [firstCoinIdx, lastCoinIdx]);
+  }, [data, firstCoinIdx, lastCoinIdx, allCoins]);
 
   const nextPage = () => {
     const nextView: Asset[] = allCoins.slice(firstCoinIdx, lastCoinIdx);
