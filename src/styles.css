@@ -1,0 +1,18 @@
+:root {
+  --background-color: #0f0e17;
+  --headline: #fffffe;
+  --text: #a7a9be;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text);
+}
+
+.pagination {
+  display: flex;
+  padding: 1rem;
+}
+.pagination-numbers:not(:first-child) {
+  margin-left: 0.5rem;
+}
