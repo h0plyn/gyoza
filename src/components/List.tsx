@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 interface Asset {
   id: string;
@@ -33,49 +32,49 @@ interface Asset {
 export default function List() {
   const [allCoins, setAllCoins] = useState<Asset[]>([]);
   const [currentCoins, setCurrentCoins] = useState<Asset[]>([]);
-  const [displayIdx, setDisplayIdx] = useState<[number, number]>([0, 25]);
   const [page, setPage] = useState<number>(1);
-  const pagination = new Array(4).fill(0);
+  const coinsPerPage = 10;
+  const totalPages = 100 / coinsPerPage;
+  const lastCoinIdx = page * coinsPerPage;
+  const firstCoinIdx = lastCoinIdx - coinsPerPage;
+  const pagination = new Array(totalPages).fill(0);
 
   useEffect(() => {
+    let isMounted = true;
+
     async function getCoins() {
-      const { data: list } = await axios.get(
+      const list = await fetch(
         'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-      );
-      setAllCoins(list);
-      const current = list.slice(displayIdx[0], displayIdx[1]);
-      setCurrentCoins(current);
+      )
+        .then((res) => res.json())
+        .then((coinList) => {
+          setAllCoins(coinList);
+          const current = coinList.slice(firstCoinIdx, lastCoinIdx);
+          setCurrentCoins(current);
+        });
+
+      console.log(list);
     }
+
     getCoins();
-  }, []);
+    return () => {
+      isMounted = false;
+    };
+  }, [firstCoinIdx, lastCoinIdx]);
 
   const nextPage = () => {
-    const nextStart: number = displayIdx[1];
-    const nextEnd: number = displayIdx[1] + 25;
-    const nextView: Asset[] = allCoins.slice(nextStart, nextEnd);
-    setDisplayIdx([nextStart, nextEnd]);
+    const nextView: Asset[] = allCoins.slice(firstCoinIdx, lastCoinIdx);
     setPage(page + 1);
     setCurrentCoins(nextView);
   };
 
   const skipToPage = (pageNum: number) => {
-    let skipTo;
-    const startingIdx = (pageNum - 1) * 25;
-    const endingIdx = startingIdx + 25;
-    if (pageNum === 1) {
-      skipTo = allCoins.slice(0, 25);
-    } else {
-      skipTo = allCoins.slice(startingIdx, endingIdx);
-    }
-
-    setCurrentCoins(skipTo);
     setPage(pageNum);
-    setDisplayIdx([startingIdx, endingIdx]);
   };
 
   return (
     <div>
-      <table>
+      <table data-testid="table">
         <tbody>
           <tr>
             <th>Logo</th>
@@ -85,7 +84,7 @@ export default function List() {
           </tr>
           {currentCoins.map((coin) => {
             return (
-              <tr key={coin.name}>
+              <tr key={coin.name} title="coins">
                 <td>
                   {' '}
                   <img
@@ -108,7 +107,9 @@ export default function List() {
           const currentPage = page === pageNumber;
           return (
             <div
+              key={pageNumber}
               className="pagination-numbers"
+              id={currentPage ? 'current-page' : ''}
               onClick={() => skipToPage(pageNumber)}
             >
               {pageNumber}
@@ -116,7 +117,10 @@ export default function List() {
           );
         })}
       </div>
-      <button disabled={page > 3 ? true : false} onClick={() => nextPage()}>
+      <button
+        disabled={page > totalPages - 1 ? true : false}
+        onClick={() => nextPage()}
+      >
         Next
       </button>
     </div>
