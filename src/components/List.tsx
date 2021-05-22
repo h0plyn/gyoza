@@ -3,39 +3,29 @@ import { Asset } from '../types';
 import useFetch from '../hooks/useFetch';
 
 export default function List() {
-  const [allCoins, setAllCoins] = useState<Asset[]>([]);
-  const [currentCoins, setCurrentCoins] = useState<Asset[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const coinsPerPage = 10;
-  const totalPages = 100 / coinsPerPage;
-  const lastCoinIdx = page * coinsPerPage;
-  const firstCoinIdx = lastCoinIdx - coinsPerPage;
-  const pagination = new Array(totalPages).fill(0);
-  const { data } = useFetch(
+  const { data, loading, error } = useFetch(
     'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
   );
+  const [allCoins, setAllCoins] = useState<Asset[]>([]);
+  const [page, setPage] = useState<number>(1);
+
+  const coinsPerPage = 20;
+  const totalPages = 100 / coinsPerPage;
+  const pagination = new Array(totalPages).fill(0);
+  const lastCoinIdx = page * coinsPerPage;
+  const firstCoinIdx = lastCoinIdx - coinsPerPage;
 
   useEffect(() => {
-    let isMounted = true;
-    if (data) {
-      if (isMounted) setAllCoins(data);
-      const current = allCoins.slice(firstCoinIdx, lastCoinIdx);
-      if (isMounted) setCurrentCoins(current);
-    }
-    return () => {
-      isMounted = false;
-    };
-  }, [data, firstCoinIdx, lastCoinIdx, allCoins]);
+    if (data) setAllCoins(data);
+  }, [data, allCoins]);
 
-  const nextPage = () => {
-    const nextView: Asset[] = allCoins.slice(firstCoinIdx, lastCoinIdx);
-    setPage(page + 1);
-    setCurrentCoins(nextView);
-  };
+  function nextPage() {
+    setPage((prevPage) => prevPage + 1);
+  }
 
-  const skipToPage = (pageNum: number) => {
+  function skipToPage(pageNum: number) {
     setPage(pageNum);
-  };
+  }
 
   return (
     <div>
@@ -47,23 +37,24 @@ export default function List() {
             <th>Name</th>
             <th>Current Price</th>
           </tr>
-          {currentCoins.map((coin) => {
-            return (
-              <tr key={coin.name} title="coins">
-                <td>
-                  {' '}
-                  <img
-                    src={coin.image}
-                    alt={coin.name}
-                    style={{ maxWidth: 20, maxHeight: 20 }}
-                  />
-                </td>
-                <td>${coin.symbol.toUpperCase()}</td>
-                <td>{coin.name}</td>
-                <td>{coin.current_price}</td>
-              </tr>
-            );
-          })}
+          {!loading &&
+            allCoins.slice(firstCoinIdx, lastCoinIdx).map((coin) => {
+              return (
+                <tr key={coin.name} title="coins">
+                  <td>
+                    {' '}
+                    <img
+                      src={coin.image}
+                      alt={coin.name}
+                      style={{ maxWidth: 20, maxHeight: 20 }}
+                    />
+                  </td>
+                  <td>${coin.symbol.toUpperCase()}</td>
+                  <td>{coin.name}</td>
+                  <td>{coin.current_price}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
       <div className="pagination">
