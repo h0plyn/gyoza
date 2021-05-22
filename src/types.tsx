@@ -26,3 +26,8 @@ export interface Asset {
   roi?: null;
   last_updated: string;
 }
+
+export interface Page {
+  page: number;
+  setPage(num: number): void;
+}

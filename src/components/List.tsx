@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Asset } from '../types';
 import useFetch from '../hooks/useFetch';
+import Pagination from './Pagination';
 
 const data = [
   {
@@ -74,22 +75,12 @@ export default function List() {
   const [page, setPage] = useState<number>(1);
 
   const coinsPerPage = 5;
-  const totalPages = 100 / coinsPerPage;
-  const pagination = new Array(totalPages).fill(0);
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
 
   useEffect(() => {
     if (data) setAllCoins(data);
-  }, [data, allCoins]);
-
-  function nextPage() {
-    setPage((prevPage) => prevPage + 1);
-  }
-
-  function skipToPage(pageNum: number) {
-    setPage(pageNum);
-  }
+  }, [allCoins]);
 
   return (
     <div>
@@ -121,28 +112,7 @@ export default function List() {
             })}
         </tbody>
       </table>
-      <div className="pagination">
-        {pagination.map((_, idx) => {
-          const pageNumber = idx + 1;
-          const currentPage = page === pageNumber;
-          return (
-            <div
-              key={pageNumber}
-              className="pagination-numbers"
-              id={currentPage ? 'current-page' : ''}
-              onClick={() => skipToPage(pageNumber)}
-            >
-              {pageNumber}
-            </div>
-          );
-        })}
-      </div>
-      <button
-        disabled={page > totalPages - 1 ? true : false}
-        onClick={() => nextPage()}
-      >
-        Next
-      </button>
+      <Pagination page={page} setPage={setPage} />
     </div>
   );
 }
