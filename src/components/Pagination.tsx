@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { Page } from '../types';
 
 const Pagination: FC<Page> = ({ page, setPage }: Page) => {
-  const coinsPerPage = 5;
+  const coinsPerPage = 10;
   const totalPages = 100 / coinsPerPage;
   const pagination = new Array(totalPages).fill(0);
 
   return (
-    <div>
-      <div className="pagination">
+    <Fragment>
+      <div className="pagination" title="pagination">
         {pagination.map((_, idx) => {
           const pageNumber = idx + 1;
           const currentPage = page === pageNumber;
@@ -30,7 +30,7 @@ const Pagination: FC<Page> = ({ page, setPage }: Page) => {
       >
         Next
       </button>
-    </div>
+    </Fragment>
   );
 };
 
