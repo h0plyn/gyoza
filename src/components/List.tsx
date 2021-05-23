@@ -12,7 +12,6 @@ export default function List() {
   const [allCoins, setAllCoins] = useState<Asset[]>([]);
   const [page, setPage] = useState<number>(1);
   const [coinsPerPage, setCoinsPerPage] = useState<number>(10);
-  const [singleCoin, setSingleCoin] = useState<Asset>();
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
   const { setCurrentCoin } = useCoin();
@@ -20,6 +19,7 @@ export default function List() {
   useEffect(() => {
     if (data) setAllCoins(data);
   }, [data]);
+
   return (
     <div>
       {error && <div>Something went wrong fetching data...</div>}
