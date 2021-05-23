@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Asset } from '../types';
 import useFetch from '../hooks/useFetch';
 import Pagination from './Pagination';
+import { Link } from 'react-router-dom';
 
 export default function List() {
   const { data, loading, error } = useFetch(
@@ -10,13 +11,14 @@ export default function List() {
   const [allCoins, setAllCoins] = useState<Asset[]>([]);
   const [page, setPage] = useState<number>(1);
   const [coinsPerPage, setCoinsPerPage] = useState<number>(10);
+  const [singleCoin, setSingleCoin] = useState<Asset>();
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
 
   useEffect(() => {
     if (data) setAllCoins(data);
   }, [data]);
-
+  console.log(singleCoin);
   return (
     <div>
       {error && <div>Something went wrong fetching data...</div>}
@@ -30,6 +32,7 @@ export default function List() {
           </tr>
           {!loading &&
             allCoins.slice(firstCoinIdx, lastCoinIdx).map((coin: Asset) => {
+              const slug = coin.name.replace(/\s+/g, '').toLowerCase();
               return (
                 <tr key={coin.name} title="coins">
                   <td>
@@ -41,7 +44,9 @@ export default function List() {
                     />
                   </td>
                   <td>${coin.symbol.toUpperCase()}</td>
-                  <td>{coin.name}</td>
+                  <td onClick={() => setSingleCoin(coin)}>
+                    <Link to={`${slug}`}>{coin.name}</Link>
+                  </td>
                   <td>{coin.current_price}</td>
                 </tr>
               );
