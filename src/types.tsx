@@ -31,3 +31,14 @@ export interface Page {
   page: number;
   setPage(num: number): void;
 }
+
+export type SingleCoin = Asset | (() => Asset);
+
+export type EmptyObject = {
+  [K in any]: never;
+};
+
+export interface SingleCoinContext {
+  currentCoin: Asset | undefined;
+  setCurrentCoin: () => SingleCoin;
+}

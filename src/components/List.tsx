@@ -3,6 +3,7 @@ import { Asset } from '../types';
 import useFetch from '../hooks/useFetch';
 import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
+import { useCoin } from '../context/coin';
 
 export default function List() {
   const { data, loading, error } = useFetch(
@@ -14,6 +15,7 @@ export default function List() {
   const [singleCoin, setSingleCoin] = useState<Asset>();
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
+  const { setCurrentCoin } = useCoin();
 
   useEffect(() => {
     if (data) setAllCoins(data);
@@ -43,7 +45,7 @@ export default function List() {
                     />
                   </td>
                   <td>${coin.symbol.toUpperCase()}</td>
-                  <td onClick={() => setSingleCoin(coin)}>
+                  <td onClick={() => setCurrentCoin(coin)}>
                     <Link to={`${slug}`}>{coin.name}</Link>
                   </td>
                   <td>{coin.current_price}</td>
