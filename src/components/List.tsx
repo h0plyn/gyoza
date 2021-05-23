@@ -18,7 +18,6 @@ export default function List() {
   useEffect(() => {
     if (data) setAllCoins(data);
   }, [data]);
-  console.log(singleCoin);
   return (
     <div>
       {error && <div>Something went wrong fetching data...</div>}
@@ -32,7 +31,7 @@ export default function List() {
           </tr>
           {!loading &&
             allCoins.slice(firstCoinIdx, lastCoinIdx).map((coin: Asset) => {
-              const slug = coin.name.replace(/\s+/g, '').toLowerCase();
+              const slug = coin.id.replace(/\s+/g, '').toLowerCase();
               return (
                 <tr key={coin.name} title="coins">
                   <td>

@@ -1,27 +1,49 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import { Asset } from '../types';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
+
+interface Coin {
+  coin: string;
+}
 
 const SingleCoin = (props: any) => {
-  const { coin } = useParams();
-  const { data, loading, error } = useFetch(
-    `https://api.coingecko.com/api/v3/coins/${coin}`
-  );
+  const { coin }: Coin = useParams();
+  const [currentCoin, setCurrentCoin] = useState<string>(coin);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<any>({});
+  const history = useHistory();
 
-  console.log(coin);
-  console.log(data);
+  useEffect(() => {
+    setLoading(true);
+    async function fetchCoin() {
+      const coin = await fetch(
+        `https://api.coingecko.com/api/v3/coins/${currentCoin}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('inside chain', data);
+          setData(data);
+        });
+    }
+    fetchCoin();
+    setLoading(false);
+  }, [currentCoin, coin]);
+
   return (
     <Fragment>
-      {error && <div>Something went wrong...</div>}
-      {!loading ? (
+      {!loading && data ? (
         <Fragment>
-          <div>Single Coin Info</div>
-          <div>{coin.id}</div>
+          <div className="single">Single Coin Info</div>
+          <div className="single">{data.id}</div>
+          <div className="single">{data.symbol}</div>
         </Fragment>
       ) : (
         ''
       )}
+      <button title="back" onClick={() => history.push('/')}>
+        Back
+      </button>
     </Fragment>
   );
 };

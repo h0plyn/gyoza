@@ -8,7 +8,7 @@ const App = () => {
       <header>🥟 Gyoza</header>
       <Switch>
         <Route exact path="/" render={() => <List />} />
-        <Route path="/:coin" render={() => <SingleCoin />} />
+        <Route path="/:coin" render={(props) => <SingleCoin {...props} />} />
       </Switch>
     </Router>
   );
