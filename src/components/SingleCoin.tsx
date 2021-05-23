@@ -12,7 +12,7 @@ const SingleCoin = () => {
       {!loading && currentCoin ? (
         <Fragment>
           <div className="single">Single Coin Info</div>
-          <div className="single">{currentCoin.id}</div>
+          <div className="single">{currentCoin.name}</div>
           <div className="single">{currentCoin.symbol}</div>
         </Fragment>
       ) : (

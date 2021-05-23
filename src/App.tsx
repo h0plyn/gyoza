@@ -3,12 +3,13 @@ import SingleCoin from '../src/components/SingleCoin';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from './components';
 import { CoinProvider } from './context/coin';
+import { Header } from './components';
 
 const App = () => {
   return (
     <Router>
       <Layout>
-        <header>🥟 Gyoza</header>
+        <Header />
         <Switch>
           <CoinProvider>
             <Route exact path="/" render={() => <List />} />
