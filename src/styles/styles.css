@@ -14,31 +14,60 @@
   --tertiary: #2cb67d;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--background-color);
   color: var(--text);
   font-size: 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+#layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
 }
 
 #header {
   display: flex;
-  margin: 1rem;
-  gap: 1rem;
-  justify-self: center;
+  justify-content: center;
   align-items: center;
+  margin-top: 5rem;
+  gap: 1rem;
 }
 
 .logo {
   font-size: 6rem;
 }
 
+a {
+  text-decoration: none;
+  color: var(--highlight);
+}
+
 .logo-text {
   position: relative;
   bottom: 1rem;
   font-size: 7rem;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: Helvetica, sans-serif;
   color: #a792e4;
   text-shadow: 0 0 80px rgb(192 219 255 / 48%), 0 0 32px var(--highlight);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-around;
 }
 
 .pagination {
@@ -51,10 +80,6 @@ body {
 
 #current-page {
   color: var(--tertiary);
-}
-
-th {
-  color: var(--headline);
 }
 
 .single {

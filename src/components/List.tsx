@@ -4,17 +4,19 @@ import useFetch from '../hooks/useFetch';
 import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
 import { useCoin } from '../context/coin';
+import { CoinCard } from '.';
 
 export default function List() {
   const { data, loading, error } = useFetch(
     'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
   );
+
   const [allCoins, setAllCoins] = useState<Asset[]>([]);
   const [page, setPage] = useState<number>(1);
   const [coinsPerPage, setCoinsPerPage] = useState<number>(10);
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
-  const { setCurrentCoin } = useCoin();
+  const { setCurrentCoin }: { setCurrentCoin(coin: Asset): void } = useCoin();
 
   useEffect(() => {
     if (data) setAllCoins(data);
@@ -23,37 +25,22 @@ export default function List() {
   return (
     <div>
       {error && <div>Something went wrong fetching data...</div>}
-      <table data-testid="table">
-        <tbody>
-          <tr>
-            <th>Logo</th>
-            <th>Symbol</th>
-            <th>Name</th>
-            <th>Current Price</th>
-          </tr>
+      <div data-testid="div">
+        <div>
+          <div className="card-header">
+            <h3>Logo</h3>
+            <h3>Name</h3>
+            <h3>Symbol</h3>
+            <h3>Current Price</h3>
+          </div>
           {!loading &&
-            allCoins.slice(firstCoinIdx, lastCoinIdx).map((coin: Asset) => {
-              const slug = coin.id.replace(/\s+/g, '').toLowerCase();
-              return (
-                <tr key={coin.name} title="coins">
-                  <td>
-                    {' '}
-                    <img
-                      src={coin.image}
-                      alt={coin.name}
-                      style={{ maxWidth: 20, maxHeight: 20 }}
-                    />
-                  </td>
-                  <td>${coin.symbol.toUpperCase()}</td>
-                  <td onClick={() => setCurrentCoin(coin)}>
-                    <Link to={`${slug}`}>{coin.name}</Link>
-                  </td>
-                  <td>{coin.current_price}</td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+            allCoins
+              .slice(firstCoinIdx, lastCoinIdx)
+              .map((coin: Asset) => (
+                <CoinCard coin={coin} setCurrentCoin={setCurrentCoin} />
+              ))}
+        </div>
+      </div>
       <Pagination page={page} setPage={setPage} />
     </div>
   );

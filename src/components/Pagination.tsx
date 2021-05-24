@@ -7,7 +7,7 @@ const Pagination: FC<Page> = ({ page, setPage }: Page) => {
   const pagination = new Array(totalPages).fill(0);
 
   return (
-    <Fragment>
+    <div style={{ marginBottom: '3rem' }}>
       <div className="pagination" title="pagination">
         {pagination.map((_, idx) => {
           const pageNumber = idx + 1;
@@ -30,7 +30,7 @@ const Pagination: FC<Page> = ({ page, setPage }: Page) => {
       >
         Next
       </button>
-    </Fragment>
+    </div>
   );
 };
 
