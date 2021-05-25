@@ -20,6 +20,7 @@ export default function List() {
   const { setCurrentCoin }: { setCurrentCoin(coin: Asset): void } = useCoin();
   const [query, setQuery] = useState('');
   const [queryResults, setQueryResults] = useState<Asset[]>([]);
+  const [ascending, setAscending] = useState<boolean>(true);
 
   useEffect(() => {
     if (data) setAllCoins(data);
@@ -34,25 +35,74 @@ export default function List() {
     setQuery(e.target.value);
   }
 
+  function sortBy(e: any) {
+    let sorted = [...allCoins];
+    console.log(e.target.innerHTML);
+
+    if (e.target.innerHTML === '24hr') {
+      if (ascending) {
+        sorted = allCoins.sort(
+          (a, b) =>
+            b.price_change_percentage_24h - a.price_change_percentage_24h
+        );
+        setQueryResults(sorted);
+        setAscending(!ascending);
+      } else {
+        sorted = allCoins.sort(
+          (a, b) =>
+            a.price_change_percentage_24h - b.price_change_percentage_24h
+        );
+        setQueryResults(sorted);
+        setAscending(!ascending);
+      }
+    }
+  }
+
   return (
     <div>
       {error && <div>Something went wrong fetching data...</div>}
       <div data-testid="div">
-        <div>
+        <div
+          style={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'flex-end',
+            height: '2.1rem',
+          }}
+        >
           <input
+            style={{
+              borderRadius: '5px',
+              border: '1px solid var(--secondary)',
+              backgroundColor: 'var(--card-bg)',
+              color: 'var(--tertiary)',
+              padding: '.5rem',
+              fontSize: '1.2rem',
+            }}
             type="text"
             name="query"
             value={query}
             onChange={(e) => handleChange(e)}
+            placeholder="Coin Name"
           />
         </div>
         <div>
           <div className="card-header">
-            <h3 className="rank">Rank</h3>
-            <h3 className="f1">Coin</h3>
-            <h3 className="price">Price</h3>
-            <h3 className="daily-change">24hr</h3>
-            <h3 className="f1">Market Cap</h3>
+            <h3 className="rank" onClick={(e) => sortBy(e)}>
+              Rank
+            </h3>
+            <h3 className="f1" onClick={(e) => sortBy(e)}>
+              Coin
+            </h3>
+            <h3 className="price" onClick={(e) => sortBy(e)}>
+              Price
+            </h3>
+            <h3 className="daily-change" onClick={(e) => sortBy(e)}>
+              24hr
+            </h3>
+            <h3 className="f1" onClick={(e) => sortBy(e)}>
+              Market Cap
+            </h3>
           </div>
           {!loading &&
             queryResults
