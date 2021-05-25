@@ -43,3 +43,11 @@
   display: flex;
   justify-content: flex-start;
 }
+
+.up {
+  color: seagreen;
+}
+
+.down {
+  color: lightcoral;
+}

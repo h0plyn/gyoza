@@ -15,6 +15,9 @@ const CoinCard: FC<{
   const { coin, idx, setCurrentCoin } = props;
   const slug = coin.id.replace(/\s+/g, '').toLowerCase();
   const mkt_cap_pos = idx + 1;
+  const changeColor: boolean = coin.price_change_percentage_24h
+    .toString()
+    .includes('-');
 
   return (
     <div className="card-container" key={coin.name}>
@@ -33,7 +36,7 @@ const CoinCard: FC<{
       <div className="content-box flex card-price">
         ${coin.current_price.toLocaleString()}
       </div>
-      <div className="content-box">
+      <div className={`${changeColor ? 'down' : 'up'} content-box`}>
         {coin.price_change_percentage_24h.toFixed(1)}%
       </div>
       <div className="content-box mkt-cap">
