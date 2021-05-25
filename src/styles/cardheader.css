@@ -1,0 +1,28 @@
+.card-header {
+  display: flex;
+  justify-content: space-around;
+}
+
+.rank {
+  position: relative;
+  right: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.price {
+  display: flex;
+  flex: 1;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  right: 1.3rem;
+}
+
+.daily-change {
+  position: relative;
+  left: 1.7rem;
+  flex: 1;
+}

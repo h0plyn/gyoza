@@ -12,6 +12,8 @@
   --highlight: #7f5af0;
   --secondary: #72757e;
   --tertiary: #2cb67d;
+  --serif: 'Josefin Sans';
+  --sans-serif: 'Lato';
 }
 
 * {
@@ -25,10 +27,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin: 0;
   padding: 0;
+  font-family: var(--sans-serif), sans-serif;
 }
 
 #layout {
@@ -60,14 +62,9 @@ a {
   position: relative;
   bottom: 1rem;
   font-size: 7rem;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--serif), serif;
   color: #a792e4;
   text-shadow: 0 0 80px rgb(192 219 255 / 48%), 0 0 32px var(--highlight);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-around;
 }
 
 .pagination {
@@ -84,4 +81,31 @@ a {
 
 .single {
   color: var(--text);
+}
+
+/* Utils */
+.flex {
+  display: flex;
+}
+
+.f1 {
+  flex: 1;
+}
+
+.f2 {
+  flex: 2;
+}
+
+.aic {
+  align-items: center;
+}
+
+.jcc {
+  justify-content: center;
+}
+
+.c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

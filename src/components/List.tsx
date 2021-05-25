@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { Asset } from '../types';
 import useFetch from '../hooks/useFetch';
 import Pagination from './Pagination';
-import { Link } from 'react-router-dom';
 import { useCoin } from '../context/coin';
 import { CoinCard } from '.';
+import '../styles/cardheader.css';
+import '../styles/card.css';
 
 export default function List() {
   const { data, loading, error } = useFetch(
@@ -28,16 +29,22 @@ export default function List() {
       <div data-testid="div">
         <div>
           <div className="card-header">
-            <h3>Logo</h3>
-            <h3>Name</h3>
-            <h3>Symbol</h3>
-            <h3>Current Price</h3>
+            <h3 className="rank">Rank</h3>
+            <h3 className="f1">Coin</h3>
+            <h3 className="price">Price</h3>
+            <h3 className="daily-change">24hr</h3>
+            <h3 className="f1">Market Cap</h3>
           </div>
           {!loading &&
             allCoins
               .slice(firstCoinIdx, lastCoinIdx)
-              .map((coin: Asset) => (
-                <CoinCard coin={coin} setCurrentCoin={setCurrentCoin} />
+              .map((coin: Asset, idx: number) => (
+                <CoinCard
+                  coin={coin}
+                  setCurrentCoin={setCurrentCoin}
+                  idx={idx}
+                  key={coin.id}
+                />
               ))}
         </div>
       </div>

@@ -3,28 +3,44 @@ import { Asset } from '../types';
 import { Link } from 'react-router-dom';
 import '../styles/card.css';
 
-const CoinCard: FC<{ coin: Asset; setCurrentCoin(coin: Asset): void }> =
-  (props: { coin: Asset; setCurrentCoin(coin: Asset): void }) => {
-    const { coin, setCurrentCoin } = props;
-    const slug = coin.id.replace(/\s+/g, '').toLowerCase();
+const CoinCard: FC<{
+  coin: Asset;
+  setCurrentCoin(coin: Asset): void;
+  idx: number;
+}> = (props: {
+  coin: Asset;
+  setCurrentCoin(coin: Asset): void;
+  idx: number;
+}) => {
+  const { coin, idx, setCurrentCoin } = props;
+  const slug = coin.id.replace(/\s+/g, '').toLowerCase();
+  const mkt_cap_pos = idx + 1;
 
-    console.log(props);
-    return (
-      <div className="card-container" key={coin.name}>
-
-          {' '}
-          <img
-            src={coin.image}
-            alt={coin.name}
-            style={{ maxWidth: 20, maxHeight: 20 }}
-          />
-        <div onClick={() => setCurrentCoin(coin)}>
-          <Link to={`${slug}`}>{coin.name}</Link>
-        </div>
-        <div>{coin.symbol.toUpperCase()}</div>
-        <div>${coin.current_price}</div>
+  return (
+    <div className="card-container" key={coin.name}>
+      <div className="content-box">{mkt_cap_pos}</div>
+      <div
+        onClick={() => setCurrentCoin(coin)}
+        className="coin-name content-box"
+      >
+        <img
+          src={coin.image}
+          alt={coin.name}
+          style={{ maxWidth: 20, maxHeight: 20 }}
+        />
+        <Link to={`${slug}`}>{coin.name}</Link>
       </div>
-    );
-  };
+      <div className="content-box flex card-price">
+        ${coin.current_price.toLocaleString()}
+      </div>
+      <div className="content-box">
+        {coin.price_change_percentage_24h.toFixed(1)}%
+      </div>
+      <div className="content-box mkt-cap">
+        ${coin.market_cap.toLocaleString()}
+      </div>
+    </div>
+  );
+};
 
 export default CoinCard;
