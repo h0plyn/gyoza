@@ -18,15 +18,34 @@ export default function List() {
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
   const { setCurrentCoin }: { setCurrentCoin(coin: Asset): void } = useCoin();
+  const [query, setQuery] = useState('');
+  const [queryResults, setQueryResults] = useState<Asset[]>([]);
 
   useEffect(() => {
     if (data) setAllCoins(data);
-  }, [data]);
+    const searchTerm = query.toLowerCase();
+    const results = allCoins.filter((coin: Asset) =>
+      coin.name.toLowerCase().includes(searchTerm)
+    );
+    setQueryResults(results);
+  }, [data, query, allCoins]);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setQuery(e.target.value);
+  }
 
   return (
     <div>
       {error && <div>Something went wrong fetching data...</div>}
       <div data-testid="div">
+        <div>
+          <input
+            type="text"
+            name="query"
+            value={query}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
         <div>
           <div className="card-header">
             <h3 className="rank">Rank</h3>
@@ -36,7 +55,7 @@ export default function List() {
             <h3 className="f1">Market Cap</h3>
           </div>
           {!loading &&
-            allCoins
+            queryResults
               .slice(firstCoinIdx, lastCoinIdx)
               .map((coin: Asset, idx: number) => (
                 <CoinCard
