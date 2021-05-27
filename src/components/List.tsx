@@ -6,6 +6,7 @@ import { useCoin } from '../context/coin';
 import { CoinCard } from '.';
 import '../styles/cardheader.css';
 import '../styles/card.css';
+import useDebounce from '../hooks/useDebounce';
 
 export default function List() {
   const { data, loading, error } = useFetch(
