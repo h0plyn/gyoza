@@ -5,7 +5,7 @@ import Pagination from '../Pagination/Pagination';
 import { useCoin } from '../../context/coin';
 import { CoinCard } from '..';
 import './cardheader.css';
-import useDebounce from '../../hooks/useDebounce';
+// import useDebounce from '../../hooks/useDebounce';
 
 export default function List() {
   const { data, loading, error } = useFetch(
@@ -70,7 +70,7 @@ export default function List() {
             height: '2.1rem',
           }}
         >
-          <input
+          {/* <input
             style={{
               borderRadius: '5px',
               border: '1px solid var(--secondary)',
@@ -84,7 +84,7 @@ export default function List() {
             value={query}
             onChange={(e) => handleChange(e)}
             placeholder="Coin Name"
-          />
+          /> */}
         </div>
         <div>
           <div className="card-header">
@@ -105,7 +105,7 @@ export default function List() {
             </h3>
           </div>
           {!loading &&
-            queryResults
+            allCoins
               .slice(firstCoinIdx, lastCoinIdx)
               .map((coin: Asset, idx: number) => (
                 <CoinCard
