@@ -1,5 +1,5 @@
 import { createContext, useContext, FC, useState } from 'react';
-import { SingleCoin, Asset, SingleCoinContext } from '../types';
+import { Asset } from '../types';
 
 const CoinContext = createContext<any | undefined>(undefined);
 

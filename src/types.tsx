@@ -45,3 +45,9 @@ export interface SingleCoinContext {
   currentCoin: Asset | undefined;
   setCurrentCoin: React.Dispatch<React.SetStateAction<Asset | SingleCoin>>;
 }
+
+export interface CoinCard {
+  coin: Asset;
+  setCurrentCoin(coin: Asset): void;
+  idx: number;
+}

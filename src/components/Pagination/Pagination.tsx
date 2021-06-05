@@ -1,5 +1,5 @@
-import React, { FC, Fragment } from 'react';
-import { Page } from '../types';
+import { FC } from 'react';
+import { Page } from '../../types';
 
 const Pagination: FC<Page> = ({ page, setPage }: Page) => {
   const coinsPerPage = 10;

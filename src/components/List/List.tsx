@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Asset } from '../types';
-import useFetch from '../hooks/useFetch';
-import Pagination from './Pagination';
-import { useCoin } from '../context/coin';
-import { CoinCard } from '.';
-import '../styles/cardheader.css';
-import '../styles/card.css';
-import useDebounce from '../hooks/useDebounce';
+import { Asset } from '../../types';
+import useFetch from '../../hooks/useFetch';
+import Pagination from '../Pagination/Pagination';
+import { useCoin } from '../../context/coin';
+import { CoinCard } from '..';
+import './cardheader.css';
+import useDebounce from '../../hooks/useDebounce';
 
 export default function List() {
   const { data, loading, error } = useFetch(
@@ -37,10 +36,10 @@ export default function List() {
   }
 
   function sortBy(e: any) {
+    const target = e.target;
     let sorted = [...allCoins];
-    console.log(e.target.innerHTML);
 
-    if (e.target.innerHTML === '24hr') {
+    if (target.innerHTML === '24hr') {
       if (ascending) {
         sorted = allCoins.sort(
           (a, b) =>

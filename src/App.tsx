@@ -1,5 +1,4 @@
-import List from '../src/components/List';
-import SingleCoin from '../src/components/SingleCoin';
+import { List, SingleCoin } from './components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from './components';
 import { CoinProvider } from './context/coin';

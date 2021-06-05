@@ -1,21 +1,13 @@
-import React, { FC } from 'react';
-import { Asset } from '../types';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/card.css';
+import { CoinCard as CardProps } from '../../types';
+import './card.css';
 
-const CoinCard: FC<{
-  coin: Asset;
-  setCurrentCoin(coin: Asset): void;
-  idx: number;
-}> = (props: {
-  coin: Asset;
-  setCurrentCoin(coin: Asset): void;
-  idx: number;
-}) => {
+const CoinCard: FC<CardProps> = (props: CardProps) => {
   const { coin, idx, setCurrentCoin } = props;
   const slug = coin.id.replace(/\s+/g, '').toLowerCase();
   const mkt_cap_pos = idx + 1;
-  const changeColor: boolean = coin.price_change_percentage_24h
+  const priceChangeColor: boolean = coin.price_change_percentage_24h
     .toString()
     .includes('-');
 
@@ -36,7 +28,7 @@ const CoinCard: FC<{
       <div className="content-box flex card-price">
         ${coin.current_price.toLocaleString()}
       </div>
-      <div className={`${changeColor ? 'down' : 'up'} content-box`}>
+      <div className={`${priceChangeColor ? 'down' : 'up'} content-box`}>
         {coin.price_change_percentage_24h.toFixed(1)}%
       </div>
       <div className="content-box mkt-cap">

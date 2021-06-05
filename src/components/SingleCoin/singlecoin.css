@@ -1,0 +1,13 @@
+.coin-container {
+  background-color: var(--card-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-height: 25vw;
+}
+
+.content-box {
+  width: 50vw;
+  height: 50vh;
+}
