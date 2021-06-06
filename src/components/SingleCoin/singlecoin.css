@@ -1,13 +1,15 @@
 .coin-container {
   background-color: var(--card-bg);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  max-height: 25vw;
+  max-width: 50vw;
+  padding: 3rem;
+}
+
+.single-coin-logo {
+  width: 7rem;
+  height: 7rem;
 }
 
 .content-area {
-  width: 50vw;
-  height: 50vh;
+  flex: 1;
 }

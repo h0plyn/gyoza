@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useCoin } from '../../context/coin';
+import { CoinCard, Pagination } from '../../components';
 import { Asset } from '../../types';
 import useFetch from '../../hooks/useFetch';
-import Pagination from '../Pagination/Pagination';
-import { useCoin } from '../../context/coin';
-import { CoinCard } from '..';
+import useDebounce from '../../hooks/useDebounce';
 import './cardheader.css';
-// import useDebounce from '../../hooks/useDebounce';
 
 export default function List() {
   const { data, loading, error } = useFetch(
@@ -21,15 +20,16 @@ export default function List() {
   const [query, setQuery] = useState('');
   const [queryResults, setQueryResults] = useState<Asset[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
+  const debouncedQuery = useDebounce(query, 500);
 
   useEffect(() => {
     if (data) setAllCoins(data);
-    const searchTerm = query.toLowerCase();
+    const searchTerm = debouncedQuery.toLowerCase();
     const results = allCoins.filter((coin: Asset) =>
       coin.name.toLowerCase().includes(searchTerm)
     );
     setQueryResults(results);
-  }, [data, query, allCoins]);
+  }, [data, debouncedQuery, allCoins]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setQuery(e.target.value);
@@ -70,7 +70,7 @@ export default function List() {
             height: '2.1rem',
           }}
         >
-          {/* <input
+          <input
             style={{
               borderRadius: '5px',
               border: '1px solid var(--secondary)',
@@ -84,7 +84,7 @@ export default function List() {
             value={query}
             onChange={(e) => handleChange(e)}
             placeholder="Coin Name"
-          /> */}
+          />
         </div>
         <div>
           <div className="card-header">
@@ -105,7 +105,7 @@ export default function List() {
             </h3>
           </div>
           {!loading &&
-            allCoins
+            queryResults
               .slice(firstCoinIdx, lastCoinIdx)
               .map((coin: Asset, idx: number) => (
                 <CoinCard

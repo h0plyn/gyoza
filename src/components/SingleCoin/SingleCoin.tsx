@@ -14,26 +14,26 @@ const SingleCoin = () => {
         <Fragment>
           <div className="coin-container">
             <div className="content-area">
-              <img src={currentCoin.image} alt={currentCoin.name} />
+              <img
+                className="single-coin-logo"
+                src={currentCoin.image}
+                alt={currentCoin.name}
+              />
               <h1>{currentCoin.name}</h1>
             </div>
             <div className="content-area">
-              <div className="single">${currentCoin.symbol}</div>
+              <div className="">${currentCoin.symbol}</div>
 
-              <div className="single">
-                Current Price: {currentCoin.current_price}
-              </div>
+              <div className="">Current Price: {currentCoin.current_price}</div>
             </div>
             <div className="content-area">
-              <div className="single">
-                Market Cap Rank: {currentCoin.market_cap}
-              </div>
-              <div className="single">
+              <div className="">Market Cap Rank: {currentCoin.market_cap}</div>
+              <div className="">
                 24 hr: {currentCoin.price_change_percentage_24h}
               </div>
             </div>
             <div className="content-area">
-              <div className="single">ATH: {currentCoin.ath}</div>
+              <div className="">ATH: {currentCoin.ath}</div>
             </div>
           </div>
         </Fragment>

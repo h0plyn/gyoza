@@ -1,11 +1,11 @@
-import { useState, FC, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export interface Debounce {
   value: string;
   wait: number;
 }
 
-const useDebounce: FC<any> = ({ value, wait }: Debounce): any => {
+export default function useDebounce(value: string, wait: number = 500) {
   const [debouncedQuery, setDebouncedQuery] = useState<string>(value);
 
   useEffect(() => {
@@ -14,6 +14,4 @@ const useDebounce: FC<any> = ({ value, wait }: Debounce): any => {
   }, [value, wait]);
 
   return debouncedQuery;
-};
-
-export default useDebounce;
+}
