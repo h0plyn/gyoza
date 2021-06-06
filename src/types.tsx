@@ -51,3 +51,7 @@ export interface CoinCard {
   setCurrentCoin(coin: Asset): void;
   idx: number;
 }
+
+export interface ListHeaderProps {
+  sortBy(e: any): void;
+}

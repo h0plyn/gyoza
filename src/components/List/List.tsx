@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useCoin } from '../../context/coin';
-import { CoinCard, Pagination } from '../../components';
+import { CoinCard, Pagination, ListHeader } from '../../components';
 import { Asset } from '../../types';
 import useFetch from '../../hooks/useFetch';
 import useDebounce from '../../hooks/useDebounce';
-import './cardheader.css';
 
 export default function List() {
   const { data, loading, error } = useFetch(
@@ -87,7 +86,8 @@ export default function List() {
           />
         </div>
         <div>
-          <div className="card-header">
+          <ListHeader sortBy={sortBy} />
+          {/* <div className="card-header">
             <h3 className="rank" onClick={(e) => sortBy(e)}>
               Rank
             </h3>
@@ -103,7 +103,7 @@ export default function List() {
             <h3 className="f1" onClick={(e) => sortBy(e)}>
               Market Cap
             </h3>
-          </div>
+          </div> */}
           {!loading &&
             queryResults
               .slice(firstCoinIdx, lastCoinIdx)
