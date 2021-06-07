@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCoin } from '../../context/singleCoin';
 import { CoinCard, Pagination, ListHeader } from '../../components';
 import { Asset, useSingleCoin } from '../../types';
@@ -15,26 +15,29 @@ export default function List() {
   const [coinsPerPage, setCoinsPerPage] = useState<number>(10);
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
-  const { setCurrentCoin }: useSingleCoin = useCoin();
   const [query, setQuery] = useState('');
   const [queryResults, setQueryResults] = useState<Asset[]>([]);
-  const [ascending, setAscending] = useState<boolean>(true);
   const debouncedQuery = useDebounce(query, 500);
+  const [ascending, setAscending] = useState<boolean>(true);
+  const { setCurrentCoin }: useSingleCoin = useCoin();
 
   useEffect(() => {
-    if (data) setAllCoins(data);
+    if (data && !allCoins.length) setAllCoins(data);
+  }, [data, allCoins]);
+
+  useEffect(() => {
     const searchTerm = debouncedQuery.toLowerCase();
     const results = allCoins.filter((coin: Asset) =>
       coin.name.toLowerCase().includes(searchTerm)
     );
     setQueryResults(results);
-  }, [data, debouncedQuery, allCoins]);
+  }, [debouncedQuery, allCoins]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setQuery(e.target.value);
   }
 
-  function sortBy(e: any) {
+  function sortBy(e: React.ChangeEvent) {
     const target = e.target;
     let sorted = [...allCoins];
 
@@ -57,6 +60,7 @@ export default function List() {
     }
   }
 
+  console.log('render');
   return (
     <div>
       {error && <div>Something went wrong fetching data...</div>}
@@ -87,23 +91,6 @@ export default function List() {
         </div>
         <div>
           <ListHeader sortBy={sortBy} />
-          {/* <div className="card-header">
-            <h3 className="rank" onClick={(e) => sortBy(e)}>
-              Rank
-            </h3>
-            <h3 className="f1" onClick={(e) => sortBy(e)}>
-              Coin
-            </h3>
-            <h3 className="price" onClick={(e) => sortBy(e)}>
-              Price
-            </h3>
-            <h3 className="daily-change" onClick={(e) => sortBy(e)}>
-              24hr
-            </h3>
-            <h3 className="f1" onClick={(e) => sortBy(e)}>
-              Market Cap
-            </h3>
-          </div> */}
           {!loading &&
             queryResults
               .slice(firstCoinIdx, lastCoinIdx)

@@ -1,10 +1,5 @@
 import { useState, useEffect } from 'react';
 
-export interface Debounce {
-  value: string;
-  wait: number;
-}
-
 export default function useDebounce(value: string, wait: number = 500) {
   const [debouncedQuery, setDebouncedQuery] = useState<string>(value);
 
