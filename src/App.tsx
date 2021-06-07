@@ -1,7 +1,7 @@
 import { List, SingleCoin } from './components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from './components';
-import { CoinProvider } from './context/coin';
+import { CoinProvider } from './context/singleCoin';
 import { Header } from './components';
 
 const App = () => {

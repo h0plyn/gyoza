@@ -32,18 +32,13 @@ export interface Page {
   setPage(num: number): void;
 }
 
-export interface SingleCoin {
-  currentCoin: any;
-  setCurrentCoin(coin: Asset): any;
+export interface useSingleCoin {
+  setCurrentCoin(coin: Asset): void;
 }
 
-export type EmptyObject = {
-  [K in any]: never;
-};
-
 export interface SingleCoinContext {
-  currentCoin: Asset | undefined;
-  setCurrentCoin: React.Dispatch<React.SetStateAction<Asset | SingleCoin>>;
+  currentCoin: Asset;
+  setCurrentCoin: React.Dispatch<React.SetStateAction<Asset>>;
 }
 
 export interface CoinCard {

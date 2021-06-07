@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { useHistory } from 'react-router';
-import { useCoin } from '../../context/coin';
+import { useCoin } from '../../context/singleCoin';
 import './singlecoin.css';
 
 const SingleCoin = () => {

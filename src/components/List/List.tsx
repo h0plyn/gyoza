@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useCoin } from '../../context/coin';
+import { useCoin } from '../../context/singleCoin';
 import { CoinCard, Pagination, ListHeader } from '../../components';
-import { Asset } from '../../types';
+import { Asset, useSingleCoin } from '../../types';
 import useFetch from '../../hooks/useFetch';
 import useDebounce from '../../hooks/useDebounce';
 
@@ -15,7 +15,7 @@ export default function List() {
   const [coinsPerPage, setCoinsPerPage] = useState<number>(10);
   const lastCoinIdx = page * coinsPerPage;
   const firstCoinIdx = lastCoinIdx - coinsPerPage;
-  const { setCurrentCoin }: { setCurrentCoin(coin: Asset): void } = useCoin();
+  const { setCurrentCoin }: useSingleCoin = useCoin();
   const [query, setQuery] = useState('');
   const [queryResults, setQueryResults] = useState<Asset[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
