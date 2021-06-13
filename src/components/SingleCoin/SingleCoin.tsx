@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useCoin } from '../../context/singleCoin';
+import { formatMoney } from '../../utils/formatPrice';
 import './singlecoin.css';
 
 const SingleCoin = () => {
@@ -24,16 +25,20 @@ const SingleCoin = () => {
             <div className="content-area">
               <div className="">${currentCoin.symbol}</div>
 
-              <div className="">Current Price: {currentCoin.current_price}</div>
+              <div className="">
+                Current Price: {formatMoney(currentCoin.current_price)}
+              </div>
             </div>
             <div className="content-area">
-              <div className="">Market Cap Rank: {currentCoin.market_cap}</div>
+              <div className="">
+                Market Cap Rank: {formatMoney(currentCoin.market_cap)}
+              </div>
               <div className="">
                 24 hr: {currentCoin.price_change_percentage_24h}
               </div>
             </div>
             <div className="content-area">
-              <div className="">ATH: {currentCoin.ath}</div>
+              <div className="">ATH: {formatMoney(currentCoin.ath)}</div>
             </div>
           </div>
         </Fragment>

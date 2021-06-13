@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { CoinCard as CardProps } from '../../types';
+import { formatMoney } from '../../utils/formatPrice';
 import './card.css';
 
 const CoinCard: FC<CardProps> = (props: CardProps) => {
@@ -26,7 +27,7 @@ const CoinCard: FC<CardProps> = (props: CardProps) => {
         <Link to={`${slug}`}>{coin.name}</Link>
       </div>
       <div className="content-box flex card-price">
-        ${coin.current_price.toLocaleString()}
+        {formatMoney(coin.current_price)}
       </div>
       <div className={`${priceChangeColor ? 'down' : 'up'} content-box`}>
         {coin.price_change_percentage_24h.toFixed(1)}%
