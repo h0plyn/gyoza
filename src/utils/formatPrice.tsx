@@ -1,8 +1,10 @@
 export function formatMoney(amount: number) {
-  const formattedAmount = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(amount);
-
-  return formattedAmount;
+  if (amount < 0.01) {
+    return `$${amount}`;
+  } else {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount);
+  }
 }
