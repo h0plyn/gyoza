@@ -5,16 +5,15 @@ import { formatMoney } from '../../utils/formatPrice';
 import './card.css';
 
 const CoinCard: FC<CardProps> = (props: CardProps) => {
-  const { coin, idx, setCurrentCoin } = props;
+  const { coin, setCurrentCoin } = props;
   const slug = coin.id.replace(/\s+/g, '').toLowerCase();
-  const mkt_cap_pos = idx + 1;
   const priceChangeColor: boolean = coin.price_change_percentage_24h
     .toString()
     .includes('-');
 
   return (
     <div className="card-container" key={coin.name}>
-      <div className="content-box">{mkt_cap_pos}</div>
+      <div className="content-box">{coin.market_cap_rank}</div>
       <div
         onClick={() => setCurrentCoin(coin)}
         className="coin-name content-box"
@@ -33,7 +32,7 @@ const CoinCard: FC<CardProps> = (props: CardProps) => {
         {coin.price_change_percentage_24h.toFixed(1)}%
       </div>
       <div className="content-box mkt-cap">
-        ${coin.market_cap.toLocaleString()}
+        ${coin.market_cap.toLocaleString('en-US')}
       </div>
     </div>
   );
