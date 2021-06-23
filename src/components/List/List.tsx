@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useCoin } from '../../context/singleCoin';
-import { CoinCard, Pagination, ListHeader } from '../../components';
+import { CoinCard, Pagination, ListHeader, Search } from '../../components';
 import { Asset, useSingleCoin } from '../../types';
 import useFetch from '../../hooks/useFetch';
 import useDebounce from '../../hooks/useDebounce';
+
 
 export default function List() {
   const { data, loading, error } = useFetch(
     'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
   );
-
   const [allCoins, setAllCoins] = useState<Asset[]>([]);
   const [page, setPage] = useState<number>(1);
   const [coinsPerPage, setCoinsPerPage] = useState<number>(10);
@@ -60,35 +60,11 @@ export default function List() {
     }
   }
 
-  console.log('render');
   return (
     <div>
       {error && <div>Something went wrong fetching data...</div>}
-      <div data-testid="div">
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            justifyContent: 'flex-end',
-            height: '2.1rem',
-          }}
-        >
-          <input
-            style={{
-              borderRadius: '5px',
-              border: '1px solid var(--secondary)',
-              backgroundColor: 'var(--card-bg)',
-              color: 'var(--tertiary)',
-              padding: '.5rem',
-              fontSize: '1.2rem',
-            }}
-            type="text"
-            name="query"
-            value={query}
-            onChange={(e) => handleChange(e)}
-            placeholder="Coin Name"
-          />
-        </div>
+      <div data-testid="container">
+        <Search query={query} handleChange={handleChange}/>
         <div>
           <ListHeader sortBy={sortBy} />
           {!loading &&

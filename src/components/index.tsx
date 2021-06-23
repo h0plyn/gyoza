@@ -5,3 +5,4 @@ export { default as List } from './List/List';
 export { default as ListHeader } from './ListHeader/ListHeader';
 export { default as Pagination } from './Pagination/Pagination';
 export { default as SingleCoin } from './SingleCoin/SingleCoin';
+export { default as Search } from './Search/Search';
