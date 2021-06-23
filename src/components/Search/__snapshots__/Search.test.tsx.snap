@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Search /> it matches the snapshot of Search 1`] = `
+<div
+  className="sc-bdnxRM hsrMvm"
+  data-testid="search"
+>
+  <label
+    htmlFor="query"
+  >
+    <input
+      data-testid="input"
+      name="query"
+      onChange={[Function]}
+      placeholder="Coin Name"
+      type="text"
+    />
+  </label>
+</div>
+`;

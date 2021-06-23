@@ -5,7 +5,6 @@ import { Asset, useSingleCoin } from '../../types';
 import useFetch from '../../hooks/useFetch';
 import useDebounce from '../../hooks/useDebounce';
 
-
 export default function List() {
   const { data, loading, error } = useFetch(
     'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
@@ -64,7 +63,7 @@ export default function List() {
     <div>
       {error && <div>Something went wrong fetching data...</div>}
       <div data-testid="container">
-        <Search query={query} handleChange={handleChange}/>
+        <Search query={query} handleChange={handleChange} />
         <div>
           <ListHeader sortBy={sortBy} />
           {!loading &&

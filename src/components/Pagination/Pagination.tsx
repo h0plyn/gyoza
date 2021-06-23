@@ -7,8 +7,8 @@ const Pagination: FC<Page> = ({ page, setPage }: Page) => {
   const pagination = new Array(totalPages).fill(0);
 
   return (
-    <div style={{ marginBottom: '3rem' }}>
-      <div className="pagination" title="pagination">
+    <div style={{ marginBottom: '3rem' }} >
+      <div className="pagination" title="pagination" data-testid='pagination'>
         {pagination.map((_, idx) => {
           const pageNumber = idx + 1;
           const currentPage = page === pageNumber;

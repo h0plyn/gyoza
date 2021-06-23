@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { SearchProps } from "../../types"
+import styled from 'styled-components';
+import { SearchProps } from '../../types';
 
 const SearchStyles = styled.div`
   display: flex;
@@ -11,22 +11,24 @@ const SearchStyles = styled.div`
     border: 1px solid var(--secondary);
     background-color: var(--card-bg);
     color: var(--tertiary);
-    padding: .5rem;
+    padding: 0.5rem;
     font-size: 1.2rem;
   }
-`
+`;
 
-export default function Search ({query, handleChange}: SearchProps) {
+export default function Search({ query, handleChange }: SearchProps) {
   return (
-    <SearchStyles data-testid='search'>
-    <input
-      type="text"
-      name="query"
-      value={query}
-      onChange={(e) => handleChange(e)}
-      placeholder="Coin Name"
-      data-testid="input"
-    />
-  </SearchStyles>
-  )
+    <SearchStyles data-testid="search">
+      <label htmlFor="query">
+        <input
+          type="text"
+          name="query"
+          value={query}
+          onChange={(e) => handleChange(e)}
+          placeholder="Coin Name"
+          data-testid="input"
+        />
+      </label>
+    </SearchStyles>
+  );
 }

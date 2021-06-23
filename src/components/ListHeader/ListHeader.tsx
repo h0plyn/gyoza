@@ -3,7 +3,7 @@ import './listheader.css';
 
 const ListHeader = ({ sortBy }: ListHeaderProps) => {
   return (
-    <div className="card-header">
+    <div className="card-header" data-testid='listheader'>
       <h3 className="rank" onClick={(e) => sortBy(e)}>
         Rank
       </h3>

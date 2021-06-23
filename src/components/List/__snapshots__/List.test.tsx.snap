@@ -7,21 +7,26 @@ exports[`<List /> it matches the snapshot of List 1`] = `
     data-testid="container"
   >
     <div
-      className="sc-bdnxRM edOJoy"
+      className="sc-bdnxRM hsrMvm"
       data-testid="search"
     >
-      <input
-        data-testid="input"
-        name="query"
-        onChange={[Function]}
-        placeholder="Coin Name"
-        type="text"
-        value=""
-      />
+      <label
+        htmlFor="query"
+      >
+        <input
+          data-testid="input"
+          name="query"
+          onChange={[Function]}
+          placeholder="Coin Name"
+          type="text"
+          value=""
+        />
+      </label>
     </div>
     <div>
       <div
         className="card-header"
+        data-testid="listheader"
       >
         <h3
           className="rank"
@@ -65,6 +70,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
   >
     <div
       className="pagination"
+      data-testid="pagination"
       title="pagination"
     >
       <div

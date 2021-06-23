@@ -12,8 +12,11 @@ describe('<List />', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  test('it displays a container to hold the List and its components', () => {
+  test('it renders the Search, ListHeader, and Pagination components in a container', () => {
     render(<List />);
     expect(screen.getByTestId('container')).toBeInTheDocument()
+    expect(screen.getByTestId('search')).toBeInTheDocument()
+    expect(screen.getByTestId('listheader')).toBeInTheDocument()
+    expect(screen.getByTestId('pagination')).toBeInTheDocument()
   });
 });
