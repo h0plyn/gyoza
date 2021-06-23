@@ -50,3 +50,9 @@ export interface CoinCard {
 export interface ListHeaderProps {
   sortBy(e: any): void;
 }
+
+export interface SearchProps {
+  query: string;
+  children?: Element;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
