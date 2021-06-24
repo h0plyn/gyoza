@@ -36,6 +36,7 @@ const Pagination: FC<Page> = ({ page, setPage }: Page) => {
               className="pagination-numbers"
               id={currentPage ? 'current-page' : ''}
               onClick={() => setPage(pageNumber)}
+              data-testid="page"
             >
               {pageNumber}
             </div>

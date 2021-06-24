@@ -71,6 +71,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
     >
       <div
         className="pagination-numbers"
+        data-testid="page"
         id="current-page"
         onClick={[Function]}
       >
@@ -78,6 +79,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
@@ -85,6 +87,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
@@ -92,6 +95,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
@@ -99,6 +103,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
@@ -106,6 +111,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
@@ -113,6 +119,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
@@ -120,6 +127,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
@@ -127,6 +135,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
@@ -134,6 +143,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
       </div>
       <div
         className="pagination-numbers"
+        data-testid="page"
         id=""
         onClick={[Function]}
       >
