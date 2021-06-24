@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListHeader /> it matches the snapshot of ListHeader 1`] = `
+<div
+  className="card-header"
+  data-testid="listheader"
+>
+  <h3
+    className="rank"
+    onClick={[Function]}
+  >
+    Rank
+  </h3>
+  <h3
+    className="f1"
+    onClick={[Function]}
+  >
+    Coin
+  </h3>
+  <h3
+    className="price"
+    onClick={[Function]}
+  >
+    Price
+  </h3>
+  <h3
+    className="daily-change"
+    onClick={[Function]}
+  >
+    24hr
+  </h3>
+  <h3
+    className="f1"
+    onClick={[Function]}
+  >
+    Market Cap
+  </h3>
+</div>
+`;
