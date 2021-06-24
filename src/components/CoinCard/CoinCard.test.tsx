@@ -16,11 +16,12 @@ describe('<CoinCard />', () => {
         <CoinCard coin={mockCoin} setCurrentCoin={setCurrentCoin} />
       </Router>
     );
-    const rank = utils.getByTestId('coin-rank').textContent;
-    const name = utils.getByTestId('coin-name');
-    const image = utils.getByTestId('coin-image');
-    const price = utils.getByTestId('coin-price').textContent;
-    const marketCap = utils.getByTestId('coin-market-cap').textContent;
+    const rank: string | null = utils.getByTestId('coin-rank').textContent;
+    const name: HTMLElement = utils.getByTestId('coin-name');
+    const image: HTMLElement = utils.getByTestId('coin-image');
+    const price: string | null = utils.getByTestId('coin-price').textContent;
+    const marketCap: string | null =
+      utils.getByTestId('coin-market-cap').textContent;
     return { setCurrentCoin, rank, name, image, price, marketCap, ...utils };
   };
 

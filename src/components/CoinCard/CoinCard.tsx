@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CoinCard as CardProps } from '../../types';
-import { formatMoney } from '../../utils/formatPrice';
+import { formatMoney } from '../../utils/formatMoney';
 import { slug } from '../../utils/slug';
 import { priceChangeColor } from '../../utils/priceChangeColor';
 
@@ -52,9 +52,7 @@ const CardStyles = styled.div`
   }
 `;
 
-const CoinCard: FC<CardProps> = (props: CardProps) => {
-  const { coin, setCurrentCoin } = props;
-
+const CoinCard: FC<CardProps> = ({ coin, setCurrentCoin }: CardProps) => {
   return (
     <CardStyles key={coin.name}>
       <div className="content-box" data-testid="coin-rank">

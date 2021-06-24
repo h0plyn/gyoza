@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useCoin } from '../../context/singleCoin';
-import { formatMoney } from '../../utils/formatPrice';
+import { formatMoney } from '../../utils/formatMoney';
 import './singlecoin.css';
 
 const SingleCoin = () => {
