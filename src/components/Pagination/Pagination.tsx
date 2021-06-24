@@ -1,5 +1,23 @@
 import { FC } from 'react';
+import styled from 'styled-components';
 import { Page } from '../../types';
+
+const InputStyles = styled.div`
+  margin-bottom: 3rem;
+
+  & .pagination {
+    display: flex;
+    padding: 1rem;
+  }
+
+  & .pagination-numbers:not(:first-child) {
+    margin-left: 0.5rem;
+  }
+
+  & #current-page {
+    color: var(--tertiary);
+  }
+`;
 
 const Pagination: FC<Page> = ({ page, setPage }: Page) => {
   const coinsPerPage = 10;
@@ -7,8 +25,8 @@ const Pagination: FC<Page> = ({ page, setPage }: Page) => {
   const pagination = new Array(totalPages).fill(0);
 
   return (
-    <div style={{ marginBottom: '3rem' }} >
-      <div className="pagination" title="pagination" data-testid='pagination'>
+    <InputStyles>
+      <div className="pagination" title="pagination" data-testid="pagination">
         {pagination.map((_, idx) => {
           const pageNumber = idx + 1;
           const currentPage = page === pageNumber;
@@ -30,7 +48,7 @@ const Pagination: FC<Page> = ({ page, setPage }: Page) => {
       >
         Next
       </button>
-    </div>
+    </InputStyles>
   );
 };
 

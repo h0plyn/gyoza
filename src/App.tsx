@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from './components';
 import { CoinProvider } from './context/singleCoin';
 import { Header } from './components';
+import { GlobalStyles } from './GlobalStyles';
 
 const App = () => {
   return (
     <Router>
+      <GlobalStyles />
       <Layout>
         <Header />
         <Switch>

@@ -38,8 +38,8 @@ describe('<Search />', () => {
   });
 
   test('it takes user entered text', () => {
-    const spy = jest.fn();
-    render(<Search handleChange={spy} />);
+    const handleChange = jest.fn();
+    render(<Search handleChange={handleChange} />);
     const input = screen.getByPlaceholderText('Coin Name');
     expect(input.value).toBe('');
     fireEvent.change(input, { target: { value: query } });
