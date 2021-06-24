@@ -2,7 +2,7 @@
 
 exports[`<CoinCard /> should match the CoinCard snapshot 1`] = `
 <div
-  className="card-container"
+  className="sc-bdnxRM kdWNSq"
 >
   <div
     className="content-box"

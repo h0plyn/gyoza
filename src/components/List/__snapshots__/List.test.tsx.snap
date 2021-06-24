@@ -7,7 +7,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
     data-testid="container"
   >
     <div
-      className="sc-gtsrHT cUrEdv"
+      className="sc-dlnjwi kgsFFX"
       data-testid="search"
     >
       <label
@@ -62,7 +62,7 @@ exports[`<List /> it matches the snapshot of List 1`] = `
     </div>
   </div>
   <div
-    className="sc-bdnxRM gdwPWC"
+    className="sc-gtsrHT cCtlgL"
   >
     <div
       className="pagination"
