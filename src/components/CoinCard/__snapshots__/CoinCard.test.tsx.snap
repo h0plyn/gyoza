@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CoinCard /> should match the CoinCard snapshot 1`] = `
+<div
+  className="card-container"
+>
+  <div
+    className="content-box"
+    data-testid="coin-rank"
+  >
+    2
+  </div>
+  <div
+    className="coin-name content-box"
+    data-testid="coin-name"
+    onClick={[Function]}
+  >
+    <img
+      alt="Ethereum"
+      data-testid="coin-image"
+      src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880"
+      style={
+        Object {
+          "maxHeight": 20,
+          "maxWidth": 20,
+        }
+      }
+    />
+    <a
+      href="/ethereum"
+      onClick={[Function]}
+    >
+      Ethereum
+    </a>
+  </div>
+  <div
+    className="content-box flex card-price"
+    data-testid="coin-price"
+  >
+    $2,012.98
+  </div>
+  <div
+    className="up content-box"
+  >
+    1.7
+    %
+  </div>
+  <div
+    className="content-box mkt-cap"
+    data-testid="coin-market-cap"
+  >
+    $
+    235,151,119,166
+  </div>
+</div>
+`;

@@ -19,7 +19,7 @@ describe('<Header />', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders an 🥟 emoji icon and title', () => {
+  it('renders a 🥟 emoji icon and title', () => {
     const { getByText } = setup();
     expect(getByText('🥟')).toBeInTheDocument();
     expect(getByText('gyoza')).toBeInTheDocument();
