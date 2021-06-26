@@ -25,4 +25,5 @@
   position: relative;
   left: 1.7rem;
   flex: 1;
+  cursor: pointer;
 }

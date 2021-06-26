@@ -24,8 +24,9 @@ export const SingleCoinGrid = styled.div`
   grid-template-rows: 3fr;
   grid-template-areas:
     'logo logo price'
-    'mktcap mktcap three'
-    'priceChange ath three';
+    'graph graph graph'
+    'mktcap mktcap desc'
+    'priceChange ath desc';
   grid-gap: 1.5rem;
 
   & .title {
@@ -73,9 +74,8 @@ export const Price = styled.div`
   }
 `;
 
-export const MarketCap = styled.div`
+export const DataBox = styled.div`
   background: var(--card-bg);
-  grid-area: mktcap;
   height: 15rem;
   transition: ease-in-out 0.4s;
   display: flex;
@@ -86,38 +86,37 @@ export const MarketCap = styled.div`
     transform: scaleY(1.04);
     box-shadow: 0 0 40px rgb(192 219 255 / 18%), 0 0 22px var(--highlight);
   }
-`;
-
-export const ATH = styled.div`
-  background: var(--card-bg);
-  grid-area: ath;
-  height: 15rem;
-  transition: ease-in-out 0.4s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    transform: scaleY(1.04);
+  &.logo {
+    flex-direction: row;
+    width: 100%;
+    grid-area: logo;
+    border-radius: 4px;
     box-shadow: 0 0 40px rgb(192 219 255 / 18%), 0 0 22px var(--highlight);
+    & .title {
+      display: flex;
+      flex-direction: column;
+      margin-left: 3rem;
+    }
   }
-`;
-
-export const PriceChange = styled.div`
-  background: var(--card-bg);
-  grid-area: priceChange;
-  height: 15rem;
-  transition: ease-in-out 0.4s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  & .size {
-    font-size: 2rem;
-    margin: 0;
+  &.mktcap {
+    grid-area: mktcap;
   }
-  &:hover {
-    transform: scaleY(1.04);
-    box-shadow: 0 0 40px rgb(192 219 255 / 18%), 0 0 22px var(--highlight);
+  &.price {
+    grid-area: price;
+  }
+  &.graph {
+    grid-area: graph;
+  }
+  &.priceChange {
+    grid-area: priceChange;
+  }
+  &.ath {
+    grid-area: ath;
+  }
+  &.desc {
+    grid-area: desc;
+    padding: 2rem;
+    color: var(--card-para);
+    height: 100%;
   }
 `;

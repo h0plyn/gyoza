@@ -1,24 +1,36 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useCoin } from '../../context/singleCoin';
+import useFetch from '../../hooks/useFetch';
 import { formatMoney } from '../../utils/formatMoney';
 import { priceChangeColor } from '../../utils/priceChangeColor';
 import {
   SingleCoinStyles,
   SingleCoinGrid,
+  DataBox,
   Logo,
   Price,
-  MarketCap,
-  ATH,
-  PriceChange,
 } from './singleCoinStyles';
 
 export default function SingleCoin() {
   const [loading, setLoading] = useState(false);
+  const [suppData, setSuppData] = useState<any>({});
   const history = useHistory();
   const { currentCoin } = useCoin();
+  const {
+    data,
+    loading: supplementaryDataLoading,
+    error,
+  } = useFetch(
+    `https://api.coingecko.com/api/v3/coins/${currentCoin.id}?sparkline=true`
+  );
 
-  console.log(currentCoin);
+  useEffect(() => {
+    if (!suppData.id) {
+      setSuppData(data);
+    }
+  }, [data, suppData.id]);
+
   return (
     <Fragment>
       {!loading && currentCoin ? (
@@ -41,15 +53,18 @@ export default function SingleCoin() {
               </p>
               <p className="title">Current Price</p>{' '}
             </Price>
-            <MarketCap>
+            <DataBox className="graph">
+              <p>Graph Placeholder</p>
+            </DataBox>
+            <DataBox className="mktcap">
               <p className="datapoint">{formatMoney(currentCoin.market_cap)}</p>
               <p className="title">Total Market Cap </p>
-            </MarketCap>
-            <ATH>
+            </DataBox>
+            <DataBox className="ath">
               <p className="datapoint">{formatMoney(currentCoin.ath)}</p>
               <p className="title">All-time High</p>
-            </ATH>
-            <PriceChange>
+            </DataBox>
+            <DataBox className="priceChange">
               <p
                 className={`${
                   priceChangeColor(currentCoin) ? 'down' : 'up'
@@ -58,17 +73,19 @@ export default function SingleCoin() {
                 {currentCoin.price_change_percentage_24h.toFixed(2)}%
               </p>
               <p className="title">24 hr Change</p>
-            </PriceChange>
+            </DataBox>
 
-            <div
-              style={{
-                gridArea: 'three',
-                height: '100%',
-                backgroundColor: 'var(--card-bg)',
-              }}
-            >
-              Three
-            </div>
+            <DataBox className="desc">
+              {!supplementaryDataLoading && suppData ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: suppData?.description?.en,
+                  }}
+                ></div>
+              ) : (
+                'Loading...'
+              )}
+            </DataBox>
           </SingleCoinGrid>
         </SingleCoinStyles>
       ) : (

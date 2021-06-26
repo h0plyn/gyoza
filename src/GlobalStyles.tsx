@@ -52,6 +52,11 @@ export const GlobalStyles = createGlobalStyle`
     color: var(--highlight);
   }
 
+  a:hover {
+    text-decoration: none;
+    color: var(--tertiary);
+  }
+
   .single {
     color: var(--text);
   }
