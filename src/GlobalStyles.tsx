@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     --button: #ff8906;
     --button-text: #fffffe;
     --card-bg: #16161a;
+    --card-bg-alt: #25252b;
     --card-head: #fffffe;
     --card-para: #94a1b2;
     --stroke: #010101;
@@ -17,6 +18,8 @@ export const GlobalStyles = createGlobalStyle`
     --tertiary: #2cb67d;
     --serif: 'Josefin Sans';
     --sans-serif: 'Lato';
+    --transition: ease-in-out 0.3s
+    --boxShadow: 0 0 40px rgb(192 219 255 / 28%), 0 0 22px var(--highlight);
   }
 
   * {
@@ -72,6 +75,13 @@ export const GlobalStyles = createGlobalStyle`
 
   .single {
     color: var(--text);
+  }
+
+  .up {
+    color: seagreen;
+  }
+  .down {
+    color: lightcoral;
   }
 
   /* Utils */

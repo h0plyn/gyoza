@@ -10,9 +10,15 @@ const SearchStyles = styled.div`
     border-radius: 5px;
     border: 1px solid var(--secondary);
     background-color: var(--card-bg);
-    color: var(--tertiary);
+    color: var(--highlight);
     padding: 0.5rem;
     font-size: 1.2rem;
+    outline: none;
+    transition: var(--transition);
+    &:focus {
+      border: 1px solid var(--headline);
+      box-shadow: var(--boxShadow);
+    }
   }
 `;
 

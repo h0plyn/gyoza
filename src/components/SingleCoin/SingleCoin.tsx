@@ -2,46 +2,75 @@ import { Fragment, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useCoin } from '../../context/singleCoin';
 import { formatMoney } from '../../utils/formatMoney';
-import './singlecoin.css';
+import { priceChangeColor } from '../../utils/priceChangeColor';
+import {
+  SingleCoinStyles,
+  SingleCoinGrid,
+  Logo,
+  Price,
+  MarketCap,
+  ATH,
+  PriceChange,
+} from './singleCoinStyles';
 
-const SingleCoin = () => {
+export default function SingleCoin() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const { currentCoin } = useCoin();
 
+  console.log(currentCoin);
   return (
     <Fragment>
       {!loading && currentCoin ? (
-        <Fragment>
-          <div className="coin-container">
-            <div className="content-area">
+        <SingleCoinStyles>
+          <SingleCoinGrid>
+            <Logo>
               <img
                 className="single-coin-logo"
                 src={currentCoin.image}
                 alt={currentCoin.name}
               />
-              <h1>{currentCoin.name}</h1>
-            </div>
-            <div className="content-area">
-              <div className="">${currentCoin.symbol}</div>
+              <div className="title">
+                <h1>{currentCoin.name}</h1>
+                <p>${currentCoin.symbol.toUpperCase()}</p>
+              </div>
+            </Logo>
+            <Price>
+              <p className="datapoint">
+                {formatMoney(currentCoin.current_price)}
+              </p>
+              <p className="title">Current Price</p>{' '}
+            </Price>
+            <MarketCap>
+              <p className="datapoint">{formatMoney(currentCoin.market_cap)}</p>
+              <p className="title">Total Market Cap </p>
+            </MarketCap>
+            <ATH>
+              <p className="datapoint">{formatMoney(currentCoin.ath)}</p>
+              <p className="title">All-time High</p>
+            </ATH>
+            <PriceChange>
+              <p
+                className={`${
+                  priceChangeColor(currentCoin) ? 'down' : 'up'
+                } size`}
+              >
+                {currentCoin.price_change_percentage_24h.toFixed(2)}%
+              </p>
+              <p className="title">24 hr Change</p>
+            </PriceChange>
 
-              <div className="">
-                Current Price: {formatMoney(currentCoin.current_price)}
-              </div>
+            <div
+              style={{
+                gridArea: 'three',
+                height: '100%',
+                backgroundColor: 'var(--card-bg)',
+              }}
+            >
+              Three
             </div>
-            <div className="content-area">
-              <div className="">
-                Market Cap Rank: {formatMoney(currentCoin.market_cap)}
-              </div>
-              <div className="">
-                24 hr: {currentCoin.price_change_percentage_24h}
-              </div>
-            </div>
-            <div className="content-area">
-              <div className="">ATH: {formatMoney(currentCoin.ath)}</div>
-            </div>
-          </div>
-        </Fragment>
+          </SingleCoinGrid>
+        </SingleCoinStyles>
       ) : (
         ''
       )}
@@ -50,6 +79,4 @@ const SingleCoin = () => {
       </button>
     </Fragment>
   );
-};
-
-export default SingleCoin;
+}

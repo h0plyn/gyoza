@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CoinCard as CardProps } from '../../types';
@@ -16,6 +15,10 @@ const CardStyles = styled.div`
   justify-content: space-around;
   align-items: center;
   transition: transform 0.25s cubic-bezier(0.17, 0.67, 0.83, 0.67) 0s;
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 40px rgb(192 219 255 / 28%), 0 0 22px var(--highlight);
+  }
   .content-box {
     flex: 1;
     justify-content: center;
@@ -23,10 +26,6 @@ const CardStyles = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-  }
-  .card-container:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 40px rgb(192 219 255 / 28%), 0 0 22px var(--highlight);
   }
   .coin-name {
     display: flex;
@@ -44,15 +43,9 @@ const CardStyles = styled.div`
     display: flex;
     justify-content: flex-start;
   }
-  .up {
-    color: seagreen;
-  }
-  .down {
-    color: lightcoral;
-  }
 `;
 
-const CoinCard: FC<CardProps> = ({ coin, setCurrentCoin }: CardProps) => {
+export default function CoinCard({ coin, setCurrentCoin }: CardProps) {
   return (
     <CardStyles key={coin.name}>
       <div className="content-box" data-testid="coin-rank">
@@ -82,6 +75,4 @@ const CoinCard: FC<CardProps> = ({ coin, setCurrentCoin }: CardProps) => {
       </div>
     </CardStyles>
   );
-};
-
-export default CoinCard;
+}
