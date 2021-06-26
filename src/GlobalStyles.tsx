@@ -47,30 +47,9 @@ export const GlobalStyles = createGlobalStyle`
     width: 50vw;
   }
 
-  #header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5rem;
-    gap: 1rem;
-  }
-
-  .logo {
-    font-size: 6rem;
-  }
-
   a {
     text-decoration: none;
     color: var(--highlight);
-  }
-
-  .logo-text {
-    position: relative;
-    bottom: 1rem;
-    font-size: 7rem;
-    font-family: var(--serif), serif;
-    color: #a792e4;
-    text-shadow: 0 0 80px rgb(192 219 255 / 48%), 0 0 32px var(--highlight);
   }
 
   .single {
