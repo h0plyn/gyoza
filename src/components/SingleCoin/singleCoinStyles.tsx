@@ -28,6 +28,7 @@ export const SingleCoinGrid = styled.div`
     'mktcap mktcap desc'
     'priceChange ath desc';
   grid-gap: 1.5rem;
+  margin-bottom: 2.5rem;
 
   & .title {
     margin: 0;

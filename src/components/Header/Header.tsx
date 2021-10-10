@@ -4,7 +4,6 @@ const HeaderStyles = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5rem;
   gap: 1rem;
 
   .logo {

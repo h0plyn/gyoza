@@ -17,11 +17,7 @@ export default function SingleCoin() {
   const [suppData, setSuppData] = useState<any>({});
   const history = useHistory();
   const { currentCoin } = useCoin();
-  const {
-    data,
-    loading: supplementaryDataLoading,
-    error,
-  } = useFetch(
+  const { data, loading: supplementaryDataLoading } = useFetch(
     `https://api.coingecko.com/api/v3/coins/${currentCoin.id}?sparkline=true`
   );
 

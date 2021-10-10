@@ -35,7 +35,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: column;
     align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 5rem;
     font-family: var(--sans-serif), sans-serif;
   }
 
@@ -55,6 +55,26 @@ export const GlobalStyles = createGlobalStyle`
   a:hover {
     text-decoration: none;
     color: var(--tertiary);
+  }
+
+  button {
+    align-self: center;
+    background-color: var(--highlight);
+    color: var(--button-text);
+    border-radius: 4px;
+    border: none;
+    padding: 0.7rem;
+  }
+
+  button:hover {
+    transition: background-color ease-in-out 0.3s;
+    background-color: #5a40ab;
+  }
+
+  button:disabled {
+    background-color: grey;
+    color: lightgrey;
+    opacity: 0.3;
   }
 
   .single {

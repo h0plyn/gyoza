@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { Page } from '../../types';
 
 const PaginationStyles = styled.div`
-  margin-bottom: 3rem;
+  display: flex;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
 
   & .pagination {
     display: flex;
@@ -17,7 +20,7 @@ const PaginationStyles = styled.div`
   & #current-page {
     color: var(--tertiary);
   }
-`;
+q`;
 
 const Pagination: FC<Page> = ({ page, setPage }: Page) => {
   const coinsPerPage = 10;
@@ -26,7 +29,14 @@ const Pagination: FC<Page> = ({ page, setPage }: Page) => {
 
   return (
     <PaginationStyles>
-      <div className="pagination" title="pagination" data-testid="pagination">
+      <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+        Back
+      </button>
+      <div
+        className="pagination ac jc"
+        title="pagination"
+        data-testid="pagination"
+      >
         {pagination.map((_, idx) => {
           const pageNumber = idx + 1;
           const currentPage = page === pageNumber;
